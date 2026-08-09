@@ -11,11 +11,16 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Button
@@ -31,6 +36,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.asdroid.jetpack_ui.R
@@ -43,7 +49,7 @@ fun LTE_UI(innerPadding: PaddingValues) {
     val context = LocalContext.current
     Column(
         modifier = Modifier
-            .fillMaxSize()
+            .fillMaxSize().verticalScroll(rememberScrollState())
             .padding(innerPadding)
             .background(
                 brush = Brush.linearGradient(
@@ -85,19 +91,19 @@ fun LTE_UI(innerPadding: PaddingValues) {
 
         Text(
             "⚠\uFE0F Network Mode Warning\n" +
-                    "\n" +
+                    "" +
                     "Selecting \"LTE Only\" or \"NR Only\" may prevent you from making \n" +
                     "or receiving calls if your carrier does not support VoLTE/VoNR \n" +
-                    "in your area.\n" +
-                    "\n" +
+                    "in your area." +
+                    "" +
                     "For reliable calling, keep the mode set to:\n" +
-                    "\"LTE/WCDMA/GSM (Auto)\" — this allows automatic fallback to \n" +
+                    "\"LTE/WCDMA/GSM (Auto) / (PRL) \" — this allows automatic fallback to \n" +
                     "3G/2G networks for calls if LTE/5G voice isn't available.\n" +
-                    "\n" +
+                    "" +
                     "Only choose LTE/NR Only if:\n" +
                     "- Your carrier fully supports VoLTE or VoNR, AND\n" +
                     "- You're in an area with strong LTE/5G coverage\n" +
-                    "\n" +
+                    "" +
                     "Changing this setting may cause missed calls, dropped \n" +
                     "connections, or \"no service\" errors.",
             color = Color.LightGray,
@@ -106,43 +112,10 @@ fun LTE_UI(innerPadding: PaddingValues) {
             fontSize = 10.sp,
         )
 
-        Text(
-            "Best for All scenarios",
-            fontSize = 18.sp,
-            fontWeight = FontWeight.SemiBold,
-            color = Color(0xFFcde018)
-        )
-
-        Image(
-            painter = painterResource(R.drawable.best_for_all),
-            "Best_for_all"
-        )
+        RenderSuggestions()
+        // Best
 
 
-        Text(
-            "Best for 4G INTERNET",
-            fontSize = 18.sp,
-            fontWeight = FontWeight.SemiBold,
-            color = Color(0xFFcde018)
-        )
-
-        Image(
-            painter = painterResource(R.drawable.best_for_4g),
-            "Best_for_4g"
-        )
-
-
-        Text(
-            "Best for 5G INTERNET",
-            fontSize = 18.sp,
-            fontWeight = FontWeight.SemiBold,
-            color = Color(0xFFcde018)
-        )
-
-        Image(
-            painter = painterResource(R.drawable.best_for_5g),
-            "Best_for_5g"
-        )
 
         Button(
             onClick = { tryLTE(context) },
@@ -177,7 +150,9 @@ fun LTE_UI(innerPadding: PaddingValues) {
                 color = Color.LightGray
             )
         }
-
+        Spacer(
+            Modifier.padding(bottom = 16.dp)
+        )
     }
 }
 
@@ -198,5 +173,88 @@ fun tryLTE(context: Context) {
             "${e}Your Device doesn't support this Feature.Thanks",
             Toast.LENGTH_LONG
         ).show()
+    }
+}
+
+@Preview(showSystemUi = true)
+@Composable
+fun RenderSuggestions() {
+    LazyRow(
+        modifier = Modifier.fillMaxWidth().padding(horizontal = 6.dp),
+        state = rememberLazyListState(),
+        contentPadding = PaddingValues(18.dp)
+    ) {
+        item {
+            Column(
+                verticalArrangement = Arrangement.Top,
+
+                ) {
+                Text(
+                    "Best for All scenarios",
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    color = Color(0xFFcde018)
+                )
+
+                Spacer(
+                    modifier = Modifier.height(10.dp)
+                )
+
+                Image(
+                    painter = painterResource(R.drawable.best_for_all),
+                    "Best_for_all"
+                )
+            }
+
+
+            Spacer(
+                Modifier.width(20.dp)
+            )
+
+            Column(
+                verticalArrangement = Arrangement.Top
+            ) {
+                Text(
+                    "Best for 4G INTERNET",
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    color = Color(0xFFcde018)
+                )
+                Spacer(
+                    modifier = Modifier.height(10.dp)
+                )
+
+                Image(
+                    painter = painterResource(R.drawable.best_for_4g),
+                    "Best_for_4g"
+                )
+
+            }
+
+
+            Spacer(
+                Modifier.width(20.dp)
+            )
+
+
+            Column(
+                verticalArrangement = Arrangement.Top
+            ) {
+                Text(
+                    "Best for 5G INTERNET",
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    color = Color(0xFFcde018)
+                )
+                Spacer(
+                    modifier = Modifier.height(10.dp)
+                )
+
+                Image(
+                    painter = painterResource(R.drawable.best_for_5g),
+                    "Best_for_5g"
+                )
+            }
+        }
     }
 }

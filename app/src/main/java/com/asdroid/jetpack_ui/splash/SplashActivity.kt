@@ -78,7 +78,7 @@ fun SplashUi() {
             Modifier.height(290.dp)
         )
         Image(
-            painter = painterResource(R.drawable.logo),
+            painter = painterResource(R.drawable.ltelogo),
             "Logo",
             modifier = Modifier.size(200.dp)
         )
