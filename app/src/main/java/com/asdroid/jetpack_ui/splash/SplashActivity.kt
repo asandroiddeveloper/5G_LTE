@@ -80,7 +80,7 @@ fun SplashUi() {
         Image(
             painter = painterResource(R.drawable.ltelogo),
             "Logo",
-            modifier = Modifier.size(200.dp)
+            modifier = Modifier.size(400.dp)
         )
 
         Spacer(
@@ -94,7 +94,7 @@ fun SplashUi() {
             fontSize = 30.sp
         )
         Spacer(
-            modifier = Modifier.height(200.dp)
+            modifier = Modifier.height(80.dp)
         )
         Text(
             "Designed and developed by AS",

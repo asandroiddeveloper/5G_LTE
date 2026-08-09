@@ -49,7 +49,8 @@ fun LTE_UI(innerPadding: PaddingValues) {
     val context = LocalContext.current
     Column(
         modifier = Modifier
-            .fillMaxSize().verticalScroll(rememberScrollState())
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
             .padding(innerPadding)
             .background(
                 brush = Brush.linearGradient(
@@ -116,7 +117,6 @@ fun LTE_UI(innerPadding: PaddingValues) {
         // Best
 
 
-
         Button(
             onClick = { tryLTE(context) },
             modifier = Modifier
@@ -180,15 +180,17 @@ fun tryLTE(context: Context) {
 @Composable
 fun RenderSuggestions() {
     LazyRow(
-        modifier = Modifier.fillMaxWidth().padding(horizontal = 6.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 6.dp),
         state = rememberLazyListState(),
         contentPadding = PaddingValues(18.dp)
     ) {
         item {
             Column(
                 verticalArrangement = Arrangement.Top,
-
-                ) {
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
                 Text(
                     "Best for All scenarios",
                     fontSize = 18.sp,
@@ -197,12 +199,13 @@ fun RenderSuggestions() {
                 )
 
                 Spacer(
-                    modifier = Modifier.height(10.dp)
+                    modifier = Modifier.height(5.dp)
                 )
 
                 Image(
                     painter = painterResource(R.drawable.best_for_all),
-                    "Best_for_all"
+                    "Best_for_all",
+                    Modifier.height(350.dp)
                 )
             }
 
@@ -212,7 +215,8 @@ fun RenderSuggestions() {
             )
 
             Column(
-                verticalArrangement = Arrangement.Top
+                verticalArrangement = Arrangement.Top,
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
                     "Best for 4G INTERNET",
@@ -221,12 +225,13 @@ fun RenderSuggestions() {
                     color = Color(0xFFcde018)
                 )
                 Spacer(
-                    modifier = Modifier.height(10.dp)
+                    modifier = Modifier.height(5.dp)
                 )
 
                 Image(
                     painter = painterResource(R.drawable.best_for_4g),
-                    "Best_for_4g"
+                    "Best_for_4g",
+                    Modifier.height(350.dp)
                 )
 
             }
@@ -238,7 +243,8 @@ fun RenderSuggestions() {
 
 
             Column(
-                verticalArrangement = Arrangement.Top
+                verticalArrangement = Arrangement.Top,
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
                     "Best for 5G INTERNET",
@@ -252,7 +258,8 @@ fun RenderSuggestions() {
 
                 Image(
                     painter = painterResource(R.drawable.best_for_5g),
-                    "Best_for_5g"
+                    "Best_for_5g",
+                    Modifier.height(350.dp)
                 )
             }
         }
