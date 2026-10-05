@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.JetPackUI" parent="android:Theme.Material.Light.NoActionBar" />
-    <!-- Base application theme. -->
-    <style name="Base.Theme.JetPackUI" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    <!-- Single application theme. The app is dark by design, so there is no
+         DayNight variant: the gradient UI is the brand. windowBackground matches
+         the gradient's darkest colour so there is no white flash on cold start. -->
+    <style name="Theme.JetPackUI" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@color/brand_black</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">false</item>
     </style>
 
-    <style name="Theme.Transparent" parent="android:Theme.Material.Light.NoActionBar">
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:windowDisablePreview">true</item>
+    <!-- Launch theme handled by androidx.core:core-splashscreen, which gives one
+         seamless splash on every API level instead of a second custom activity. -->
+    <style name="Theme.JetPackUI.Splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/brand_black</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_splash_logo</item>
+        <item name="postSplashScreenTheme">@style/Theme.JetPackUI</item>
     </style>
+
 </resources>

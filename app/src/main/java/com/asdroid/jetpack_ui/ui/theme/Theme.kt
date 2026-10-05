@@ -1,58 +1,42 @@
 package com.asdroid.jetpack_ui.ui.theme
 
-import android.app.Activity
-import android.os.Build
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
-import androidx.compose.material3.dynamicDarkColorScheme
-import androidx.compose.material3.dynamicLightColorScheme
-import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.graphics.Color
 
-private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
-    secondary = PurpleGrey80,
-    tertiary = Pink80
-)
-
-private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
-    secondary = PurpleGrey40,
-    tertiary = Pink40
-
-    /* Other default colors to override
-    background = Color(0xFFFFFBFE),
-    surface = Color(0xFFFFFBFE),
+/**
+ * One brand scheme for the whole app.
+ *
+ * Deliberately not using dynamic colour: the app is a dark, branded gradient UI,
+ * and a wallpaper-derived palette was fighting the hardcoded brand colours that
+ * every screen used to paint inline.
+ */
+private val BrandColorScheme = darkColorScheme(
+    primary = ElectricBlue,
     onPrimary = Color.White,
+    primaryContainer = InkSurfaceVariant,
+    onPrimaryContainer = TextPrimary,
+    secondary = ExtraGreen,
     onSecondary = Color.White,
-    onTertiary = Color.White,
-    onBackground = Color(0xFF1C1B1F),
-    onSurface = Color(0xFF1C1B1F),
-    */
+    tertiary = SignalLime,
+    onTertiary = DeepBlack,
+    background = DeepBlack,
+    onBackground = TextPrimary,
+    surface = InkSurface,
+    onSurface = TextPrimary,
+    surfaceVariant = InkSurfaceVariant,
+    onSurfaceVariant = TextSecondary,
+    outline = TextMuted,
+    error = WarningAmber,
+    onError = DeepBlack,
 )
 
 @Composable
-fun JetPackUITheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
-    // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = true,
-    content: @Composable () -> Unit
-) {
-    val colorScheme = when {
-        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
-            val context = LocalContext.current
-            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
-        }
-
-        darkTheme -> DarkColorScheme
-        else -> LightColorScheme
-    }
-
+fun JetPackUITheme(content: @Composable () -> Unit) {
     MaterialTheme(
-        colorScheme = colorScheme,
-        typography = Typography,
-        content = content
+        colorScheme = BrandColorScheme,
+        typography = AppTypography,
+        content = content,
     )
 }
