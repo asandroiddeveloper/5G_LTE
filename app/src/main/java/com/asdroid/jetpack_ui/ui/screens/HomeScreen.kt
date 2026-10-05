@@ -52,13 +52,17 @@ enum class HomeTab(val labelRes: Int) {
  */
 @Composable
 fun HomeScreen(
-    openRadioInfoRequest: Int = 0,
     modifier: Modifier = Modifier,
+    openRadioInfoRequest: Int = 0,
 ) {
     val context = LocalContext.current
     val navigator = remember(context) { NetworkSettingsNavigator(context) }
     val snackbarHostState = remember { SnackbarHostState() }
     var tab by rememberSaveable { mutableStateOf(HomeTab.STATUS) }
+
+    // Read the string during composition: Context.getString() inside a coroutine would
+    // not be invalidated when the configuration (and therefore locale) changes.
+    val openFailedMessage = stringResource(R.string.setup_open_failed_title)
 
     LaunchedEffect(openRadioInfoRequest) {
         if (openRadioInfoRequest > 0) {
@@ -66,7 +70,7 @@ fun HomeScreen(
             val result = navigator.open()
             val needsHelp = !result.opened || result.kind == RadioTargetKind.SETTINGS_FALLBACK
             if (needsHelp) {
-                snackbarHostState.showSnackbar(context.getString(R.string.setup_open_failed_title))
+                snackbarHostState.showSnackbar(openFailedMessage)
             }
         }
     }

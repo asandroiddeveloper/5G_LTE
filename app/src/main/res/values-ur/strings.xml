@@ -2,7 +2,9 @@
 <resources>
     <!-- Urdu (RTL) translations. Strings that are not translated fall back to the
          English resources automatically. -->
+    <string name="app_name">5G LTE</string>
     <string name="app_tagline">اپنے نیٹ ورک کو پہچانیں، کالز چلتی رکھیں۔</string>
+    <string name="unit_mbps">%1$s Mbps</string>
 
     <string name="tab_status">حالت</string>
     <string name="tab_setup">سیٹ اپ</string>
@@ -49,7 +51,9 @@
     <string name="setup_step_2">“Set Preferred Network Type” تلاش کریں۔</string>
     <string name="setup_step_3">رہنمائی ٹیب میں بتایا گیا آپشن چنیں، پھر یہاں واپس آئیں۔</string>
     <string name="setup_open_button">Phone info کھولیں</string>
+    <string name="setup_device_hint">%1$s پہچانا گیا۔ عام راستہ: %2$s</string>
     <string name="setup_open_failed_title">پوشیدہ مینو نہیں کھل سکا</string>
+    <string name="setup_open_failed_body">آپ کا فون یہ پوشیدہ اسکرین ایپس کو نہیں دکھاتا۔ اسے دستی طور پر کھولنے کے لیے ڈائلر میں %1$s ڈائل کریں۔</string>
     <string name="setup_copy_code">کوڈ کاپی کریں</string>
     <string name="setup_copied">کلپ بورڈ پر کاپی ہو گیا</string>
     <string name="setup_dial_fallback">ڈائلر کھولیں</string>
@@ -58,6 +62,7 @@
     <string name="warning_body_1">اگر آپ کے نیٹ ورک میں VoLTE/VoNR دستیاب نہ ہو تو “LTE only” یا “NR only” چننے سے کالز اور ایس ایم ایس بند ہو سکتے ہیں۔</string>
     <string name="warning_body_2">قابلِ بھروسہ کالز کے لیے خودکار موڈ (LTE/GSM/WCDMA auto) رکھیں تاکہ فون آواز کے لیے 3G یا 2G پر واپس جا سکے۔</string>
     <string name="warning_body_3">صرف اسی صورت 4G یا 5G پر لاک کریں جب آپ کا نیٹ ورک اُس پر آواز سپورٹ کرتا ہو اور کوریج مضبوط ہو۔</string>
+    <string name="warning_footer">غلط موڈ کی علامات: کالیں مس ہونا، فوراً کٹ جانا، یا ری اسٹارٹ کے بعد “سروس نہیں”۔</string>
 
     <string name="guide_heading">کون سا موڈ چنوں؟</string>
     <string name="guide_intro">زوم کے لیے کسی اسکرین شاٹ پر ٹیپ کریں، یا بتائیں کہ آپ کے لیے کیا اہم ہے۔</string>
@@ -68,11 +73,17 @@
     <string name="picker_5g">زیادہ سے زیادہ رفتار</string>
     <string name="variant_all_title">ہر کام کے لیے بہترین</string>
     <string name="variant_all_subtitle">خودکار، 3G / 2G فال بیک کے ساتھ</string>
+    <string name="variant_all_pick">فہرست میں “LTE/GSM/WCDMA auto” چنیں (PRL کے ساتھ یا بغیر)۔</string>
     <string name="variant_4g_title">4G انٹرنیٹ کے لیے بہترین</string>
     <string name="variant_4g_subtitle">ڈیٹا LTE پر لاک — کالز کے لیے VoLTE ضروری</string>
+    <string name="variant_4g_pick">فہرست میں “LTE only” چنیں۔</string>
     <string name="variant_5g_title">5G انٹرنیٹ کے لیے بہترین</string>
     <string name="variant_5g_subtitle">ڈیٹا NR پر لاک — کالز کے لیے VoNR ضروری</string>
+    <string name="variant_5g_pick">فہرست میں “NR only” چنیں۔</string>
     <string name="zoom_close">بند کریں</string>
+    <string name="oem_path_samsung">سیٹنگز → کنکشنز → موبائل نیٹ ورکس → نیٹ ورک موڈ</string>
+    <string name="oem_path_xiaomi">سیٹنگز → سم کارڈز اور موبائل نیٹ ورکس → پسندیدہ نیٹ ورک کی قسم</string>
+    <string name="oem_path_generic">سیٹنگز → نیٹ ورک اور انٹرنیٹ → سمز → پسندیدہ نیٹ ورک کی قسم</string>
 
     <string name="copy_diagnostics">ڈیٹا کاپی کریں</string>
     <string name="report_copied">تفصیلات کاپی ہو گئیں</string>

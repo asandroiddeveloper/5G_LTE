@@ -6,6 +6,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.provider.Settings
+import androidx.core.net.toUri
 import com.asdroid.jetpack_ui.R
 import java.util.Locale
 
@@ -81,7 +82,7 @@ class NetworkSettingsNavigator(private val context: Context) {
     fun openDialer(): Boolean = try {
         val intent = Intent(
             Intent.ACTION_DIAL,
-            Uri.parse("tel:" + Uri.encode(USSD_CODE)),
+            ("tel:" + Uri.encode(USSD_CODE)).toUri(),
         )
         if (context !is Activity) {
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
