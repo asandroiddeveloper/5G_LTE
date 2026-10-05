@@ -44,12 +44,22 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          tail -c 3500 "$RUNNER_TEMP/gradle.log" > "$RUNNER_TEMP/tail.txt" || true
+          LINT_REPORT="app/build/intermediates/lint_intermediate_text_report/debug/lintReportDebug/lint-results-debug.txt"
           {
-            echo 'Build failed. Last lines of the Gradle output:'
+            echo 'Build failed.'
+            if [ -f "$LINT_REPORT" ]; then
+              echo
+              echo '### Lint issues'
+              echo
+              echo '```'
+              grep -E "^/home/runner/.*(Error|Warning): " "$LINT_REPORT" | head -60 || true
+              echo '```'
+            fi
+            echo
+            echo '### Gradle output tail'
             echo
             echo '```'
-            cat "$RUNNER_TEMP/tail.txt"
+            tail -c 1500 "$RUNNER_TEMP/gradle.log" || true
             echo '```'
           } > "$RUNNER_TEMP/comment.md"
           gh pr comment "${{ github.event.pull_request.number }}" --body-file "$RUNNER_TEMP/comment.md" || true

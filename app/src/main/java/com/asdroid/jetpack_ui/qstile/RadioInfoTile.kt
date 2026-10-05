@@ -1,5 +1,6 @@
 package com.asdroid.jetpack_ui.qstile
 
+import android.annotation.SuppressLint
 import android.app.PendingIntent
 import android.content.Intent
 import android.graphics.drawable.Icon
@@ -18,8 +19,8 @@ import com.asdroid.jetpack_ui.R
  */
 class RadioInfoTile : TileService() {
 
-    // getQsTile() is deprecated on API 33+ in favour of getTile(), but it exists on
-    // every API level this app supports, which getTile() does not.
+    // getQsTile() is deprecated on API 33+ in favour of getTile(), but it is the only
+    // one that exists on every API level this app supports.
     @Suppress("DEPRECATION")
     override fun onStartListening() {
         super.onStartListening()
@@ -29,6 +30,9 @@ class RadioInfoTile : TileService() {
         tile.state = Tile.STATE_INACTIVE
     }
 
+    // The deprecated Intent overload is only reached below API 34, where it still
+    // works; from API 34 the PendingIntent overload is the supported path.
+    @SuppressLint("StartActivityAndCollapseDeprecated")
     override fun onClick() {
         super.onClick()
         val intent = Intent(this, MainActivity::class.java)
