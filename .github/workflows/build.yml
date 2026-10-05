@@ -37,7 +37,8 @@ jobs:
       - name: Lint, unit tests and debug build
         run: |
           set -o pipefail
-          ./gradlew --no-daemon lintDebug testDebugUnitTest assembleDebug 2>&1 | tee "$RUNNER_TEMP/gradle.log"
+          # assembleRelease also exercises R8 and resource shrinking (AGP 9.3 optimization).
+          ./gradlew --no-daemon lintDebug testDebugUnitTest assembleDebug assembleRelease 2>&1 | tee "$RUNNER_TEMP/gradle.log"
 
       - name: Report build failures on the pull request
         if: failure() && github.event_name == 'pull_request'
