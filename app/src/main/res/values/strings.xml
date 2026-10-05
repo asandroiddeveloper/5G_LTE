@@ -1,46 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">5G LTE</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
+    <string name="app_tagline">Know your network. Keep your calls working.</string>
 
-    <string name="lorem_ipsum">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
-        volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus
-        dui nec risus. Maecenas non sodales nisi, vel dictum dolor. Class aptent taciti sociosqu ad
-        litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse blandit eleifend
-        diam, vel rutrum tellus vulputate quis. Aliquam eget libero aliquet, imperdiet nisl a,
-        ornare ex. Sed rhoncus est ut libero porta lobortis. Fusce in dictum tellus.\n\n
-        Suspendisse interdum ornare ante. Aliquam nec cursus lorem. Morbi id magna felis. Vivamus
-        egestas, est a condimentum egestas, turpis nisl iaculis ipsum, in dictum tellus dolor sed
-        neque. Morbi tellus erat, dapibus ut sem a, iaculis tincidunt dui. Interdum et malesuada
-        fames ac ante ipsum primis in faucibus. Curabitur et eros porttitor, ultricies urna vitae,
-        molestie nibh. Phasellus at commodo eros, non aliquet metus. Sed maximus nisl nec dolor
-        bibendum, vel congue leo egestas.\n\n
-        Sed interdum tortor nibh, in sagittis risus mollis quis. Curabitur mi odio, condimentum sit
-        amet auctor at, mollis non turpis. Nullam pretium libero vestibulum, finibus orci vel,
-        molestie quam. Fusce blandit tincidunt nulla, quis sollicitudin libero facilisis et. Integer
-        interdum nunc ligula, et fermentum metus hendrerit id. Vestibulum lectus felis, dictum at
-        lacinia sit amet, tristique id quam. Cras eu consequat dui. Suspendisse sodales nunc ligula,
-        in lobortis sem porta sed. Integer id ultrices magna, in luctus elit. Sed a pellentesque
-        est.\n\n
-        Aenean nunc velit, lacinia sed dolor sed, ultrices viverra nulla. Etiam a venenatis nibh.
-        Morbi laoreet, tortor sed facilisis varius, nibh orci rhoncus nulla, id elementum leo dui
-        non lorem. Nam mollis ipsum quis auctor varius. Quisque elementum eu libero sed commodo. In
-        eros nisl, imperdiet vel imperdiet et, scelerisque a mauris. Pellentesque varius ex nunc,
-        quis imperdiet eros placerat ac. Duis finibus orci et est auctor tincidunt. Sed non viverra
-        ipsum. Nunc quis augue egestas, cursus lorem at, molestie sem. Morbi a consectetur ipsum, a
-        placerat diam. Etiam vulputate dignissim convallis. Integer faucibus mauris sit amet finibus
-        convallis.\n\n
-        Phasellus in aliquet mi. Pellentesque habitant morbi tristique senectus et netus et
-        malesuada fames ac turpis egestas. In volutpat arcu ut felis sagittis, in finibus massa
-        gravida. Pellentesque id tellus orci. Integer dictum, lorem sed efficitur ullamcorper,
-        libero justo consectetur ipsum, in mollis nisl ex sed nisl. Donec maximus ullamcorper
-        sodales. Praesent bibendum rhoncus tellus nec feugiat. In a ornare nulla. Donec rhoncus
-        libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
-        vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
-    </string>
-    <string name="title_activity_splash">SplashActivity</string>
+    <!-- Navigation -->
+    <string name="tab_status">Status</string>
+    <string name="tab_setup">Setup</string>
+    <string name="tab_guide">Guide</string>
+
+    <!-- Shared values -->
+    <string name="value_unknown">—</string>
+    <string name="unit_mbps">%1$s Mbps</string>
+
+    <!-- Status screen -->
+    <string name="card_live_connection">Live connection</string>
+    <string name="card_mobile_network">Mobile network</string>
+    <string name="label_transport">Transport</string>
+    <string name="label_state">State</string>
+    <string name="label_billing">Billing</string>
+    <string name="label_download">Estimated download</string>
+    <string name="label_upload">Estimated upload</string>
+    <string name="label_interface">Interface</string>
+    <string name="label_dns">DNS</string>
+    <string name="label_carrier">Carrier</string>
+    <string name="label_generation">Network type</string>
+    <string name="transport_wifi">Wi-Fi</string>
+    <string name="transport_cellular">Cellular</string>
+    <string name="transport_ethernet">Ethernet</string>
+    <string name="transport_vpn">VPN</string>
+    <string name="transport_other">Other</string>
+    <string name="transport_none">Not connected</string>
+    <string name="state_online">Online</string>
+    <string name="state_offline">Offline</string>
+    <string name="state_validated">Internet verified</string>
+    <string name="billing_metered">Metered</string>
+    <string name="billing_unmetered">Unmetered</string>
+    <string name="gen_5g_sa">5G Standalone</string>
+    <string name="gen_5g_nsa">5G (NSA, 4G anchor)</string>
+    <string name="gen_5g">5G</string>
+    <string name="gen_4g">4G LTE</string>
+    <string name="gen_3g">3G</string>
+    <string name="gen_2g">2G</string>
+    <string name="gen_unknown">Unknown</string>
+    <string name="permission_title">Show my 5G / 4G type</string>
+    <string name="permission_body">Android keeps the current network type hidden from apps until you grant the Phone permission. It is read on-device only — nothing is stored or sent anywhere.</string>
+    <string name="permission_button">Allow</string>
+
+    <!-- Setup screen -->
+    <string name="setup_heading">Set your preferred network mode</string>
+    <string name="setup_intro">Android does not let an app change radio settings for you, so this screen opens the hidden menu and you pick the mode yourself. It takes about 20 seconds.</string>
+    <string name="setup_step_1">Tap “Open Phone info”.</string>
+    <string name="setup_step_2">Find “Set Preferred Network Type”.</string>
+    <string name="setup_step_3">Choose the option from the Guide tab, then come back here.</string>
+    <string name="setup_open_button">Open Phone info</string>
+    <string name="setup_device_hint">Detected %1$s. Usual path: %2$s</string>
+    <string name="setup_open_failed_title">Couldn\'t open the hidden menu</string>
+    <string name="setup_open_failed_body">Your device does not expose the Phone info screen to apps. Dial %1$s in the dialer to open it manually.</string>
+    <string name="setup_copy_code">Copy code</string>
+    <string name="setup_copied">Copied to clipboard</string>
+    <string name="setup_dial_fallback">Open dialer</string>
+    <string name="setup_close">Close</string>
+    <string name="warning_title">⚠️ Network mode warning</string>
+    <string name="warning_body_1">Choosing “LTE only” or “NR only” can block calls and SMS when your carrier does not support VoLTE/VoNR in your area.</string>
+    <string name="warning_body_2">For reliable calling keep the automatic mode (LTE/GSM/WCDMA auto, sometimes shown with “PRL”) so the phone can fall back to 3G or 2G for voice.</string>
+    <string name="warning_body_3">Only lock to 4G or 5G if your carrier supports voice over that network and your coverage is strong.</string>
+    <string name="warning_footer">Warning signs of a bad mode: missed calls, calls that drop instantly, or “no service” after a reboot.</string>
+
+    <!-- Guide screen -->
+    <string name="guide_heading">Which mode should I pick?</string>
+    <string name="guide_intro">Tap a screenshot to zoom, or tell the app what you care about most.</string>
+    <string name="guide_pick_hint">Tap a card to zoom</string>
+    <string name="picker_title">I care most about…</string>
+    <string name="picker_auto">Calls stay reliable</string>
+    <string name="picker_4g">Stable fast data</string>
+    <string name="picker_5g">Maximum speed</string>
+    <string name="variant_all_title">Best for everything</string>
+    <string name="variant_all_subtitle">Automatic, with 3G / 2G fallback</string>
+    <string name="variant_all_pick">In the list, pick “LTE/GSM/WCDMA auto” (with or without PRL).</string>
+    <string name="variant_4g_title">Best for 4G internet</string>
+    <string name="variant_4g_subtitle">Data locked to LTE — calls need VoLTE</string>
+    <string name="variant_4g_pick">In the list, pick “LTE only”.</string>
+    <string name="variant_5g_title">Best for 5G internet</string>
+    <string name="variant_5g_subtitle">Data locked to NR — calls need VoNR</string>
+    <string name="variant_5g_pick">In the list, pick “NR only”.</string>
+    <string name="zoom_close">Close</string>
+    <string name="oem_path_samsung">Settings → Connections → Mobile networks → Network mode</string>
+    <string name="oem_path_xiaomi">Settings → SIM cards &amp; mobile networks → Preferred network type</string>
+    <string name="oem_path_generic">Settings → Network &amp; internet → SIMs → Preferred network type</string>
+
+    <!-- Diagnostics -->
+    <string name="copy_diagnostics">Copy diagnostics</string>
+    <string name="report_copied">Diagnostics copied to clipboard</string>
+
+    <!-- Quick settings tile -->
+    <string name="qs_tile_label">Phone info</string>
 </resources>

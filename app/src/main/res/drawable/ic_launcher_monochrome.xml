@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Monochrome layer for the adaptive icon (Android 13+ themed icons).
+     The system tints this layer, so it must be a single-colour silhouette.
+     Bars are centred inside the inner 66dp safe zone of the 108dp canvas. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M38,63 L46,63 L46,79 L38,79 Z" />
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M50,51 L58,51 L58,79 L50,79 Z" />
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M62,39 L70,39 L70,79 L62,79 Z" />
+</vector>

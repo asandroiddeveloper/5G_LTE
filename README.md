@@ -1,83 +1,169 @@
-# 5G LTE — JetPackUI
+# 5G LTE
 
-A Jetpack Compose Android app exploring modern UI patterns, gradient theming, and network-related system settings.
+A small, focused Android app that helps you check what your phone's radio is actually doing and
+reach the hidden **Phone info** screen where the preferred network mode (5G / LTE / automatic)
+is set.
 
-## Overview
+Built with Kotlin and Jetpack Compose (Material 3). No accounts, no ads, no analytics.
 
-**5G LTE** is a Kotlin + Jetpack Compose project featuring a custom splash screen, gradient-based UI theming, and a network mode settings screen (LTE/NR preference controls with safety warnings for voice call reliability).
+- **Package:** `com.asdroid.jetpack_ui`
+- **Min SDK:** 24 (Android 7.0)
+- **Target / compile SDK:** 37
+- **JDK toolchain:** 25 (see `gradle/gradle-daemon-jvm.properties`)
 
-- **Package name:** `com.asdroid.jetpack_ui`
-- **Language:** Kotlin
-- **UI Toolkit:** Jetpack Compose (Material 3)
-- **Min SDK / Target SDK:** _(fill in from `build.gradle`)_
+---
 
-## Features
+## What it does
 
-- **Splash Screen** — animated linear-gradient background with logo and branding, edge-to-edge layout with a custom bottom bar
-- **Custom Color Palette** — centralized theme colors (`ElectricBlue`, `ExtraGreen`, `Black`, etc.) defined in `Color.kt`
-- **Network Settings Screen** — lets users choose preferred network mode (Auto / LTE Only / NR Only) with an in-app warning about potential call reliability issues when VoLTE/VoNR isn't supported
-- **Scrollable layouts** — long-form screens using `Column` + `verticalScroll` for content that exceeds screen height
-- **Material Icons (Extended)** — icon support via `material-icons-extended`
+### Status tab — what your connection is doing right now
+* **Live connection card**: transport (Wi-Fi / Cellular / VPN / Ethernet), whether the internet is
+  verified, metered or not, the OS bandwidth estimate, the interface and DNS servers.
+  Powered by `ConnectivityManager.registerDefaultNetworkCallback()` — **no runtime permission**.
+* **Mobile network card**: carrier name, and — if you opt in — whether you are on **5G Standalone,
+  5G NSA, 4G LTE, 3G or 2G**, including the carrier display override that makes an LTE anchor
+  report as 5G.
+* **Copy diagnostics**: one tap puts device, network and menu-resolution details on the clipboard
+  for a bug report.
 
-## Project Structure
+### Setup tab — reach the hidden menu
+* Three numbered steps and a button that opens the **Phone info** screen, probing a ladder of known
+  entry points (AOSP, Samsung, Xiaomi, MediaTek), then falling back to documented settings screens.
+* If nothing hidden is reachable, an honest dialog offers the dialer code `*#*#4636#*#*`
+  (copy button + open-dialer button) instead of failing silently.
+* The safety warning is now three readable paragraphs: locking to 4G/5G can break calls if your
+  carrier has no VoLTE/VoNR in your area.
+
+### Guide tab — which mode should I pick?
+* The three real screenshots (automatic / 4G only / 5G only), each with a one-line "what to pick
+  in the list" caption.
+* A picker ("calls stay reliable" / "stable fast data" / "maximum speed") that scrolls straight to
+  the matching card, page dots, and **tap-to-zoom** with pinch magnification.
+
+### Everywhere
+* **Quick Settings tile** ("Phone info"): one tap from the shade runs the same navigation ladder.
+* **Tablet layout**: at ≥ 720dp wide the tabs become a navigation rail and content fills the pane.
+* **Urdu translations** (`values-ur`) with RTL support, alongside English.
+
+---
+
+## Permissions and privacy
+
+| Permission | Why | Prompt? |
+|---|---|---|
+| `ACCESS_NETWORK_STATE` | Read the active network's capabilities for the Status tab | No (normal permission) |
+| `READ_PHONE_STATE` | Display the current network type (5G / 4G / 3G). **Optional** — every feature except that row works without it | Yes, only when you tap *Allow* |
+
+Nothing is collected, stored or uploaded. The diagnostics report is only placed on your clipboard
+when you ask for it.
+
+> **Note:** no third-party app can change the radio mode itself — Android reserves that for the
+> system and the dialer. This app exists to take you to the exact screen and explain the trade-offs.
+
+---
+
+## Project structure
 
 ```
 app/src/main/java/com/asdroid/jetpack_ui/
-├── MainActivity.kt
-├── splash/
-│   ├── SplashActivity.kt        # Splash screen entry point
-│   └── ui/theme/
-│       ├── Color.kt              # App color palette
-│       └── JetPackUITheme        # Theme wrapper
-├── appui/
-│   └── home.kt                   # Home / network settings UI
-└── ...
+├── MainActivity.kt                  # edge-to-edge, splash-screen install, tile requests
+├── network/
+│   ├── ConnectionStatus.kt          # ConnectivityManager monitor (no permission)
+│   ├── TelephonyStatus.kt           # carrier + network generation, opt-in permission
+│   ├── NetworkSettingsNavigator.kt  # the probe ladder for the hidden radio menu
+│   └── Diagnostics.kt               # copyable report builder
+├── qstile/RadioInfoTile.kt          # Quick Settings tile
+├── ui/
+│   ├── theme/                       # one brand theme: palette, type scale, gradient
+│   ├── components/                  # cards, rows, pills, chips, nav rail, steps
+│   └── screens/                     # HomeScreen (tabs) + Status / Setup / Guide
+└── util/Clipboard.kt
 ```
 
-## Theming
+Assets live in `res/drawable-nodpi/` as WebP: the three guide screenshots are 1080px wide
+(~126 KB each) instead of full-resolution PNGs (~550 KB), because files in `res/drawable/`
+are treated as mdpi and were being decoded at ~3× their size on a modern phone.
 
-Colors are centralized in `Color.kt` and referenced across composables rather than hardcoded inline:
+---
 
-```kotlin
-val ElectricBlue = Color(0xFF080FC3)
-val ExtraGreen = Color(0xFF...)
-val Black = Color(0xFF...)
+## Build
+
+```bash
+git clone https://github.com/asandroiddeveloper/5G_LTE.git
+cd 5G_LTE
+./gradlew assembleDebug          # debug APK in app/build/outputs/apk/debug/
+./gradlew testDebugUnitTest      # unit tests
+./gradlew lintDebug              # Android lint
 ```
 
-## Setup
+Open in Android Studio (Ladybug or newer) and let it sync; the Gradle wrapper pins Gradle 9.5 and
+AGP 9.3.1.
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/asandroiddeveloper/5G_LTE.git
-   ```
-2. Open in **Android Studio** (Giraffe or later recommended).
-3. Sync Gradle (ensure `androidx.appcompat:appcompat` and other dependencies are pinned to valid published versions — avoid placeholder/invalid version numbers).
-4. Run on an emulator or physical device (min API level per `build.gradle`).
+### Release signing (optional)
 
-## Key Dependencies
+Create a git-ignored `keystore.properties` in the repository root:
 
-```kotlin
-implementation("androidx.compose.material:material-icons-extended:1.7.5")
+```properties
+storeFile=/absolute/path/to/release.jks
+storePassword=…
+keyAlias=…
+keyPassword=…
 ```
 
-## Notes on Network Settings
+With that file present, `./gradlew assembleRelease` produces a signed, R8-optimised APK
+(`optimization { enable = true }` in AGP 9.3 also shrinks unused resources). Without it the
+release build still compiles, unsigned.
 
-Changing the preferred network mode to **LTE Only** or **NR Only** may prevent calls if the carrier doesn't support VoLTE/VoNR. The default/recommended mode is **Auto (LTE/WCDMA/GSM)** to ensure fallback for voice calls. Programmatically changing system network mode requires `MODIFY_PHONE_STATE` or carrier-privileged access and is not available to standard third-party apps without elevated permissions.
+### Versioning from CI
+
+`versionCode` / `versionName` default to `1` / `1.0` and can be overridden:
+
+```bash
+./gradlew assembleRelease -PversionCode=42 -PversionName=1.4.0
+```
+
+---
 
 ## CI/CD
 
-GitHub Actions workflow builds a debug APK and publishes it as a GitHub Release on every push to the `master` branch.
+`.github/workflows/build.yml`
 
-## Author
+* **On every push to `master` and every pull request**: lint, unit tests and a debug APK, uploaded
+  as a build artifact.
+* **On a `v*` tag**: builds a release APK and publishes a GitHub Release with generated notes.
+  Add these repository secrets to get a **signed** release; otherwise the workflow publishes the
+  debug APK so a release is never empty:
 
-Designed and developed by **AS** ([asdroid](https://github.com/asdroid))
+  | Secret | Contents |
+  |---|---|
+  | `KEYSTORE_BASE64` | `base64 -w0 release.jks` |
+  | `KEYSTORE_PASSWORD` | keystore password |
+  | `KEY_ALIAS` | key alias |
+  | `KEY_PASSWORD` | key password |
 
-## Branding
+`.github/dependabot.yml` keeps Gradle dependencies and Actions up to date weekly.
 
-- **Developer:** AS
-- **Developer tag:** asdroid
-- **Package namespace:** `com.asdroid.jetpack_ui`
+---
 
-## Tags
+## Tests
 
-`android` `kotlin` `jetpack-compose` `material3` `5g` `lte` `network-settings` `android-ui` `mobile-app` `compose-ui` `android-development` `asdroid` `as`
+* `NetworkGenerationMapperTest` — the pure mapping from network type codes (and 5G display
+  overrides) to a generation label. Runs on the JVM.
+* `ExampleInstrumentedTest` — launches `MainActivity` and checks the title renders.
+
+---
+
+## Known limitations
+
+* The **OEM entry points** in `NetworkSettingsNavigator` are best-effort: manufacturers move these
+  screens around between ROM versions. When nothing matches, the app says so and offers the dialer
+  code — it never pretends to have changed a setting.
+* **`READ_PHONE_STATE` is required** by Android to read the network type on modern versions; the
+  app degrades to "Unknown" rather than crashing if you decline.
+* Bandwidth figures come from the OS estimate, not a measurement — they are indicative only.
+
+## Contributing / licence
+
+No licence file is present yet; add one (Apache-2.0 or MIT are typical for this kind of app)
+before accepting outside contributions.
+
+Designed and developed by **AS** ([asdroid](https://github.com/asdroid)).
