@@ -35,7 +35,24 @@ jobs:
         run: chmod +x gradlew
 
       - name: Lint, unit tests and debug build
-        run: ./gradlew --no-daemon lintDebug testDebugUnitTest assembleDebug
+        run: |
+          set -o pipefail
+          ./gradlew --no-daemon lintDebug testDebugUnitTest assembleDebug 2>&1 | tee "$RUNNER_TEMP/gradle.log"
+
+      - name: Report build failures on the pull request
+        if: failure() && github.event_name == 'pull_request'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          tail -c 3500 "$RUNNER_TEMP/gradle.log" > "$RUNNER_TEMP/tail.txt" || true
+          {
+            echo 'Build failed. Last lines of the Gradle output:'
+            echo
+            echo '```'
+            cat "$RUNNER_TEMP/tail.txt"
+            echo '```'
+          } > "$RUNNER_TEMP/comment.md"
+          gh pr comment "${{ github.event.pull_request.number }}" --body-file "$RUNNER_TEMP/comment.md" || true
 
       - name: Upload debug APK
         uses: actions/upload-artifact@v4
