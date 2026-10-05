@@ -9,8 +9,6 @@
     <string name="tab_guide">رہنمائی</string>
 
     <string name="value_unknown">—</string>
-    <string name="value_yes">ہاں</string>
-    <string name="value_no">نہیں</string>
 
     <string name="card_live_connection">موجودہ کنکشن</string>
     <string name="card_mobile_network">موبائل نیٹ ورک</string>

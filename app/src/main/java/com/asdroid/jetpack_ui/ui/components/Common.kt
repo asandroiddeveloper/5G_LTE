@@ -53,6 +53,7 @@ fun GradientBackground(
 fun SectionCard(
     title: String,
     modifier: Modifier = Modifier,
+    titleColor: Color = SignalLime,
     trailing: (@Composable () -> Unit)? = null,
     content: @Composable ColumnScope.() -> Unit,
 ) {
